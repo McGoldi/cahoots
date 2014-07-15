@@ -3,13 +3,18 @@ $(document).ready(function() {
 	//	$("*").highlight(key, {caseSensitive: false, className: value });
 	//});
 
-	// test
-	
+		
+	// for (var key in author) {
+	// 	if (!author.hasOwnProperty(key)) {
+	// 		continue;
+	// 	}
+	// 	if ( $('body:contains("'+key+'")').length > 0 ) {
+	// 		$("*").highlight(key, {caseSensitive: false, className: author[key] });
+	// 	}
+	// }
+
 	for (var key in author) {
-		if (!author.hasOwnProperty(key)) {
-			continue;
-		}
-		if ( $('body:contains("'+key+'")').length > 0 ) {
+		if ( (new RegExp(key)).test($('body') ) {
 			$("*").highlight(key, {caseSensitive: false, className: author[key] });
 		}
 	}
