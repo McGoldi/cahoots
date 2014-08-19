@@ -3,24 +3,29 @@ $(document).ready(function() {
 	//	$("*").highlight(key, {caseSensitive: false, className: value });
 	//});
 	
-	for (var key in author) {
-		if (!author.hasOwnProperty(key)) {
-			continue;
-		}
-		if ( $('body:contains("'+key+'")').length > 0 ) {
-			$("*").highlight(key, {caseSensitive: false, className: author[key] });
-		}
-	}
+	$.each(author,function(key,val){
+       $('*').contents()
+       .filter(function(){
+           return this.nodeType === 3;
+       })
+       .filter(function(){
+           // Only match when contains keyword anywhere in the text
+           return this.nodeValue.toLowerCase().indexOf(key.toLowerCase()) != -1;
+       })
+       .each(function(){
+           $(this).highlight(key, {caseSensitive: false, className: val });
+       });
+      });
 
 	$('span[class*=CahootsID]').tooltipster({
 		interactive: true,
 		contentAsHTML: true,
 		maxWidth: 320,
 		animation: 'grow',
-		content: 'Loading...',
+		content: 'Daten werden geladen…',
 		delay: '200',
 		speed: '200',
-		timer: '450',
+		timer: '400',
 		functionBefore: function(origin, continueTooltip) {
 			continueTooltip();
 			var id = $(this).attr('class').replace(' tooltipstered','');
