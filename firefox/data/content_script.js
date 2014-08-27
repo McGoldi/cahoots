@@ -3,19 +3,14 @@ $(document).ready(function() {
 	//	$("*").highlight(key, {caseSensitive: false, className: value });
 	//});
 	
-	$.each(author,function(key,val){
-       $('*').contents()
-       .filter(function(){
-           return this.nodeType === 3;
-       })
-       .filter(function(){
-           // Only match when contains keyword anywhere in the text
-           return this.nodeValue.toLowerCase().indexOf(key.toLowerCase()) != -1;
-       })
-       .each(function(){
-           $(this).highlight(key, {caseSensitive: false, className: val });
-       });
-      });
+	for (var key in author) {
+		if (!author.hasOwnProperty(key)) {
+			continue;
+		}
+		if ( $('body:contains("'+key+'")').length > 0 ) {
+			$("*").highlight(key, {caseSensitive: false, className: author[key] });
+		}
+	}
 
 	$('span[class*=CahootsID]').tooltipster({
 		interactive: true,
