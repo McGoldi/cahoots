@@ -1,12 +1,15 @@
 $(document).ready(function() {
-	//$.each(author, function(key, value) {
-	//	$("*").highlight(key, {caseSensitive: false, className: value });
-	//});
 	
 	for (var key in author) {
+		
 		if (!author.hasOwnProperty(key)) {
 			continue;
 		}
+
+		if ( $('form:contains("'+key+'")').length > 0 ) {
+			break;	
+		}
+		
 		if ( $('body:contains("'+key+'")').length > 0 ) {
 			$("*").highlight(key, {caseSensitive: false, className: author[key] });
 		}
